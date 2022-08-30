@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Book } from 'src/app/models/book';
+import { BookService } from 'src/services/book.service';
+import { Observable, Subscribable } from 'rxjs';
+
 
 @Component({
   selector: 'app-books-list',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooksListPage implements OnInit {
 
-  constructor() { }
+  books: Book[] = [];
 
-  ngOnInit() {
+  constructor(
+    private _bookService: BookService
+  ) { }
+
+  ngOnInit(): void {
+    this._bookService
+      .findAll()
+      .subscribe(books => {
+        this.books = books;
+
+        this._bookService
+          .getById(books[1]._id as string)
+          .subscribe(console.log);
+      }
+      );
   }
 
 }

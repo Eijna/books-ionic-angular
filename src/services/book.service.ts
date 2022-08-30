@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from 'src/app/models/book';
+import 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +13,11 @@ export class BookService {
   ) { }
 
   public findAll() {
-    this._http
-      .get<Book[]>('http://localhost:3000/books')
-      .subscribe(books => {
-        console.log(books);
-      });
+    return this._http.get<Book[]>('http://localhost:3000/books');
   }
 
   public getById(id: string) {
-    this._http
-      .get<Book>('http://localhost:3000/books/' + id)
-      .subscribe(books => {
-        console.log(books);
-      });
+    return this._http.get<Book>('http://localhost:3000/books/' + id);
   }
 
 

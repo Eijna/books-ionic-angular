@@ -11,6 +11,8 @@
 
 <ion-content>
   <ion-list>
-    <ion-item></ion-item>
+    <ion-item style="cursor: pointer" *ngFor="let book of books">
+      <ion-icon name="book-outline" style="margin-right: 1rem;"></ion-icon> {{ book.title }}
+    </ion-item>
   </ion-list>
 </ion-content>
